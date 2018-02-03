@@ -1,6 +1,6 @@
-## Crypto-functions
+# Crypto-functions
 
-# Example
+## Example
 
 Generate a private and public keys
 
