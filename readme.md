@@ -11,7 +11,7 @@ import (
     "github.com/montana-network/crypto"
 )
 
-privatekey, publickey := crypto.Keys()
+privatekey, publickey := crypto.GenKeys()
 fmt.Println("Private Key :")
 fmt.Printf("%x \n", privatekey)
 

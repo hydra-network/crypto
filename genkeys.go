@@ -11,7 +11,7 @@ import (
     "encoding/hex"
 )
 
-func Keys() (*big.Int, string) {
+func GenKeys() (*big.Int, string) {
     pubkeyCurve := elliptic.P256()
 
     privatekey := new(ecdsa.PrivateKey)
