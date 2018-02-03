@@ -12,22 +12,22 @@ import (
 )
 
 func Keys() (*big.Int, string) {
- 	pubkeyCurve := elliptic.P256()
+    pubkeyCurve := elliptic.P256()
 
- 	privatekey := new(ecdsa.PrivateKey)
- 	privatekey, err := ecdsa.GenerateKey(pubkeyCurve, rand.Reader)
- 	if err != nil {
- 		fmt.Println(err)
- 		os.Exit(1)
- 	}
+    privatekey := new(ecdsa.PrivateKey)
+    privatekey, err := ecdsa.GenerateKey(pubkeyCurve, rand.Reader)
+    if err != nil {
+        fmt.Println(err)
+        os.Exit(1)
+    }
 
- 	var pubkey ecdsa.PublicKey
- 	pubkey = privatekey.PublicKey
+    var pubkey ecdsa.PublicKey
+    pubkey = privatekey.PublicKey
 
     pubASN1, err := x509.MarshalPKIXPublicKey(&pubkey)
     if err != nil {
- 		fmt.Println(err)
- 		os.Exit(1)
+        fmt.Println(err)
+        os.Exit(1)
     }
 
     publickey := hex.EncodeToString(pubASN1)
