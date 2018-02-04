@@ -1,24 +1,28 @@
 package crypto
 
 import (
-    "os"
     "crypto/elliptic"
     "crypto/rand"
     "crypto/ecdsa"
     "crypto/x509"
-    "fmt"
     "math/big"
     "encoding/hex"
 )
 
-func GenKeys() (*big.Int, string) {
+type Address struct {
+    Privatekey   *big.Int
+    Publickey    string
+}
+
+func GenerateAddress() (Address, error) {
+    var newAddress Address
+
     pubkeyCurve := elliptic.P256()
 
     privatekey := new(ecdsa.PrivateKey)
     privatekey, err := ecdsa.GenerateKey(pubkeyCurve, rand.Reader)
     if err != nil {
-        fmt.Println(err)
-        os.Exit(1)
+        return newAddress, err
     }
 
     var pubkey ecdsa.PublicKey
@@ -26,11 +30,13 @@ func GenKeys() (*big.Int, string) {
 
     pubASN1, err := x509.MarshalPKIXPublicKey(&pubkey)
     if err != nil {
-        fmt.Println(err)
-        os.Exit(1)
+        return newAddress, err
     }
 
     publickey := hex.EncodeToString(pubASN1)
 
-    return privatekey.D, publickey
+    newAddress.Privatekey = privatekey.D
+    newAddress.Publickey = publickey
+
+    return  newAddress, nil
  }

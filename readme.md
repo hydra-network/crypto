@@ -2,7 +2,7 @@
 
 ## Example
 
-Generate a private and public keys
+How to generate a private and public keys:
 
 ```
 package main
@@ -13,12 +13,15 @@ import (
 )
 
 func main() {
-    privatekey, publickey := crypto.GenKeys()
-    fmt.Println("Private Key :")
-    fmt.Printf("%x \n", privatekey)
+    address, addrErr := crypto.GenerateAddress()
 
-    fmt.Println("Public Key :")
-    fmt.Printf("%x \n", publickey)
+    if addrErr == nil {
+        fmt.Println("Private Key :")
+        fmt.Printf("%x \n", address.Privatekey)
+
+        fmt.Println("Public Key :")
+        fmt.Printf("%x \n", address.Publickey)
+    }
 }
 
 ```
